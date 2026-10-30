@@ -1,0 +1,15 @@
+{
+  "name": "world-execute-me-mv",
+  "version": "4.0.0",
+  "private": true,
+  "type": "module",
+  "description": "world.execute(me); fan MV v4 — deterministic software rasterizer + ffmpeg",
+  "scripts": {
+    "audio": "node tools/make_audio.mjs",
+    "storyboard": "node tools/storyboard.mjs",
+    "check": "node tools/check.mjs",
+    "render": "node export/export.mjs",
+    "frame": "node export/frame.mjs",
+    "sheet": "node export/sheet.mjs"
+  }
+}

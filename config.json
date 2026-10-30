@@ -1,0 +1,60 @@
+{
+  "title": "world.execute(me);",
+  "version": "v4",
+  "tempo": {
+    "bpm": 130,
+    "beat": 0.4615384615,
+    "bar": 1.846153846,
+    "origin": 0.344
+  },
+  "duration": 211.96,
+  "safety": {
+    "preroll": 5.0,
+    "flashFrom": 148.0,
+    "flashTo": 192.34
+  },
+  "paths": {
+    "art": "assets/character",
+    "script": "docs/v4/chat_script.json",
+    "errors": "docs/v4/errors.json",
+    "lyrics": "docs/v4/lyrics.json",
+    "cues": "src/scenes/cues.js",
+    "audio": "audio/track.wav"
+  },
+  "palette": {
+    "paper": "#070B16",
+    "paperWarm": "#0D1830",
+    "ink": "#02040A",
+    "me": "#4D6BFE",
+    "meHot": "#8FA5FF",
+    "meDim": "#26389C",
+    "you": "#F2F6FF",
+    "sub": "#A9B8D9",
+    "err": "#F5506F",
+    "ash": "#5B6784",
+    "off": "#2A3350",
+    "dead": "#161E33",
+    "white": "#FFFFFF"
+  },
+  "spot": {
+    "eggplant": {
+      "base": "#7B52AB",
+      "light": "#9C74C9",
+      "dark": "#4E3172"
+    },
+    "tomato": {
+      "base": "#D4432F",
+      "light": "#EA6A4E",
+      "dark": "#8E2A1C"
+    }
+  },
+  "fonts": {
+    "serif": "/system/fonts/NotoSerif-Regular.ttf",
+    "serifAlt": "/system/fonts/DancingScript-Regular.ttf",
+    "sans": "/system/fonts/Roboto-Regular.ttf",
+    "sansBold": "/system/fonts/Roboto-Bold.ttf",
+    "mono": "/system/fonts/CutiveMono.ttf",
+    "monoUi": "/system/fonts/DroidSansMono.ttf",
+    "cjk": "/system/fonts/DroidSansChinese.ttf"
+  }
+}

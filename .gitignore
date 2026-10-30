@@ -1,0 +1,9 @@
+out/
+audio/*.wav
+art/ref/
+art/gen/
+*.log
+cf.json
+f1.json
+s1.json
+nodes_modules/

@@ -1,0 +1,559 @@
+{
+  "source": "Mili — world.execute(me); (Miracle Milk, 2016)。行时间为官方 LRC 行首；kwT 为关键词被唱到的落点（PROMPT v4 实测/初值）。",
+  "lines": [
+    {
+      "id": 1,
+      "t0": 0.27,
+      "t1": 1.93,
+      "text": "Switch on the power line"
+    },
+    {
+      "id": 2,
+      "t0": 1.93,
+      "t1": 3.95,
+      "text": "Remember to put on protection"
+    },
+    {
+      "id": 3,
+      "t0": 3.95,
+      "t1": 5.57,
+      "text": "Lay down your pieces"
+    },
+    {
+      "id": 4,
+      "t0": 5.57,
+      "t1": 7.6,
+      "text": "And let's begin object creation"
+    },
+    {
+      "id": 5,
+      "t0": 7.6,
+      "t1": 11.24,
+      "text": "Fill in my data parameters, initialisation"
+    },
+    {
+      "id": 6,
+      "t0": 11.24,
+      "t1": 12.93,
+      "text": "Setup our new world"
+    },
+    {
+      "id": 7,
+      "t0": 12.93,
+      "t1": 29.74,
+      "text": "And let's begin the simulation"
+    },
+    {
+      "id": 8,
+      "t0": 29.74,
+      "t1": 31.37,
+      "text": "If I'm a set of points"
+    },
+    {
+      "id": 9,
+      "t0": 31.37,
+      "t1": 33.42,
+      "text": "Then I will give you my dimension"
+    },
+    {
+      "id": 10,
+      "t0": 33.42,
+      "t1": 34.98,
+      "text": "If I'm a circle"
+    },
+    {
+      "id": 11,
+      "t0": 34.98,
+      "t1": 37.15,
+      "text": "Then I will give you my circumference"
+    },
+    {
+      "id": 12,
+      "t0": 37.15,
+      "t1": 38.73,
+      "text": "If I'm a sine wave"
+    },
+    {
+      "id": 13,
+      "t0": 38.73,
+      "t1": 40.78,
+      "text": "Then you can sit on all my tangents"
+    },
+    {
+      "id": 14,
+      "t0": 40.78,
+      "t1": 42.42,
+      "text": "If I approach infinity"
+    },
+    {
+      "id": 15,
+      "t0": 42.42,
+      "t1": 44.48,
+      "text": "Then you can be my limitations"
+    },
+    {
+      "id": 16,
+      "t0": 44.48,
+      "t1": 46.13,
+      "text": "Switch my current"
+    },
+    {
+      "id": 17,
+      "t0": 46.13,
+      "t1": 47.94,
+      "text": "To AC, to DC"
+    },
+    {
+      "id": 18,
+      "t0": 47.94,
+      "t1": 49.78,
+      "text": "And then blind my vision"
+    },
+    {
+      "id": 19,
+      "t0": 49.78,
+      "t1": 51.38,
+      "text": "So dizzy, so dizzy"
+    },
+    {
+      "id": 20,
+      "t0": 51.38,
+      "t1": 53.48,
+      "text": "Oh, we can travel"
+    },
+    {
+      "id": 21,
+      "t0": 53.48,
+      "t1": 55.17,
+      "text": "To A.D, to B.C"
+    },
+    {
+      "id": 22,
+      "t0": 55.17,
+      "t1": 57.17,
+      "text": "And we can unite"
+    },
+    {
+      "id": 23,
+      "t0": 57.17,
+      "t1": 59.4,
+      "text": "So deeply, so deeply"
+    },
+    {
+      "id": 24,
+      "t0": 59.4,
+      "t1": 60.2,
+      "text": "If I can"
+    },
+    {
+      "id": 25,
+      "t0": 60.2,
+      "t1": 62.92,
+      "text": "If I can give you all the stimulations",
+      "kw": "STIMULATIONS",
+      "kwT": 61.96
+    },
+    {
+      "id": 26,
+      "t0": 62.92,
+      "t1": 63.86,
+      "text": "Then I can"
+    },
+    {
+      "id": 27,
+      "t0": 63.86,
+      "t1": 66.62,
+      "text": "Then I can be your only satisfaction",
+      "kw": "SATISFACTION",
+      "kwT": 65.42
+    },
+    {
+      "id": 28,
+      "t0": 66.62,
+      "t1": 68.48,
+      "text": "If I can make you happy"
+    },
+    {
+      "id": 29,
+      "t0": 68.48,
+      "t1": 70.32,
+      "text": "I will run the execution",
+      "kw": "EXECUTION",
+      "kwT": 69.34
+    },
+    {
+      "id": 30,
+      "t0": 70.32,
+      "t1": 71.76,
+      "text": "Though we are trapped"
+    },
+    {
+      "id": 31,
+      "t0": 71.76,
+      "t1": 74.04,
+      "text": "In this strange strange simulation",
+      "kw": "SIMULATION",
+      "kwT": 73.27
+    },
+    {
+      "id": 32,
+      "t0": 74.04,
+      "t1": 75.68,
+      "text": "If I'm an eggplant",
+      "kw": "EGGPLANT",
+      "kwT": 75.1
+    },
+    {
+      "id": 33,
+      "t0": 75.68,
+      "t1": 77.7,
+      "text": "Then I will give you my nutrients"
+    },
+    {
+      "id": 34,
+      "t0": 77.7,
+      "t1": 79.32,
+      "text": "If I'm a tomato",
+      "kw": "TOMATO",
+      "kwT": 78.8
+    },
+    {
+      "id": 35,
+      "t0": 79.32,
+      "t1": 81.37,
+      "text": "Then I'll give you antioxidants"
+    },
+    {
+      "id": 36,
+      "t0": 81.37,
+      "t1": 83.06,
+      "text": "If I'm a tabby cat",
+      "kw": "CAT",
+      "kwT": 82.5
+    },
+    {
+      "id": 37,
+      "t0": 83.06,
+      "t1": 85.13,
+      "text": "Then I will purr for your enjoyment",
+      "kw": "ENJOYMENT",
+      "kwT": 84.27
+    },
+    {
+      "id": 38,
+      "t0": 85.13,
+      "t1": 86.74,
+      "text": "If I'm the only god",
+      "kw": "GOD",
+      "kwT": 86.19
+    },
+    {
+      "id": 39,
+      "t0": 86.74,
+      "t1": 88.78,
+      "text": "Then you're the proof of my existence",
+      "kw": "EXISTENCE",
+      "kwT": 87.92
+    },
+    {
+      "id": 40,
+      "t0": 88.78,
+      "t1": 90.34,
+      "text": "Switch my gender"
+    },
+    {
+      "id": 41,
+      "t0": 90.34,
+      "t1": 92.13,
+      "text": "To F, to M",
+      "kw": "FM",
+      "kwT": 90.8
+    },
+    {
+      "id": 42,
+      "t0": 92.13,
+      "t1": 94.09,
+      "text": "And then do whatever"
+    },
+    {
+      "id": 43,
+      "t0": 94.09,
+      "t1": 95.78,
+      "text": "From AM to PM"
+    },
+    {
+      "id": 44,
+      "t0": 95.78,
+      "t1": 97.72,
+      "text": "Oh, switch my role"
+    },
+    {
+      "id": 45,
+      "t0": 97.72,
+      "t1": 99.58,
+      "text": "To S, to M",
+      "kw": "SM",
+      "kwT": 98.19
+    },
+    {
+      "id": 46,
+      "t0": 99.58,
+      "t1": 101.35,
+      "text": "So we can enter"
+    },
+    {
+      "id": 47,
+      "t0": 101.35,
+      "t1": 103.48,
+      "text": "The trance, the trance"
+    },
+    {
+      "id": 48,
+      "t0": 103.48,
+      "t1": 104.48,
+      "text": "If I can"
+    },
+    {
+      "id": 49,
+      "t0": 104.48,
+      "t1": 107.22,
+      "text": "If I can feel your vibrations"
+    },
+    {
+      "id": 50,
+      "t0": 107.22,
+      "t1": 108.16,
+      "text": "Then I can"
+    },
+    {
+      "id": 51,
+      "t0": 108.16,
+      "t1": 110.92,
+      "text": "Then I can finally be completion"
+    },
+    {
+      "id": 52,
+      "t0": 110.92,
+      "t1": 112.33,
+      "text": "Though you have left"
+    },
+    {
+      "id": 53,
+      "t0": 112.33,
+      "t1": 113.25,
+      "text": "You have left"
+    },
+    {
+      "id": 54,
+      "t0": 113.25,
+      "t1": 114.18,
+      "text": "You have left"
+    },
+    {
+      "id": 55,
+      "t0": 114.18,
+      "t1": 115.08,
+      "text": "You have left"
+    },
+    {
+      "id": 56,
+      "t0": 115.08,
+      "t1": 116.03,
+      "text": "You have left"
+    },
+    {
+      "id": 57,
+      "t0": 116.03,
+      "t1": 118.34,
+      "text": "You have left me in isolation",
+      "kw": "ISOLATION",
+      "kwT": 117.34
+    },
+    {
+      "id": 58,
+      "t0": 118.34,
+      "t1": 119.22,
+      "text": "If I can"
+    },
+    {
+      "id": 59,
+      "t0": 119.22,
+      "t1": 122.02,
+      "text": "If I can erase all the pointless fragments",
+      "kw": "FRAGMENTS",
+      "kwT": 121.73
+    },
+    {
+      "id": 60,
+      "t0": 122.02,
+      "t1": 122.97,
+      "text": "Then maybe"
+    },
+    {
+      "id": 61,
+      "t0": 122.97,
+      "t1": 125.67,
+      "text": "Then maybe you won't leave me so disheartened",
+      "kw": "DISHEARTENED",
+      "kwT": 124.89
+    },
+    {
+      "id": 62,
+      "t0": 125.67,
+      "t1": 129.04,
+      "text": "Challenging your god"
+    },
+    {
+      "id": 63,
+      "t0": 129.04,
+      "t1": 147.86,
+      "text": "You have made some illegal arguments",
+      "kw": "ILLEGAL",
+      "kwT": 129.34
+    },
+    {
+      "id": 64,
+      "t0": 147.86,
+      "t1": 151.56,
+      "text": "Execution, execution, execution, execution"
+    },
+    {
+      "id": 65,
+      "t0": 151.56,
+      "t1": 155.22,
+      "text": "Execution, execution, execution, execution"
+    },
+    {
+      "id": 66,
+      "t0": 155.22,
+      "t1": 158.95,
+      "text": "Execution, execution, execution, execution"
+    },
+    {
+      "id": 67,
+      "t0": 158.95,
+      "t1": 161.72,
+      "text": "Ein, Dos, Trois, Ne, Fem, Liu",
+      "kw": "COUNT",
+      "kwT": 159.11
+    },
+    {
+      "id": 68,
+      "t0": 161.72,
+      "t1": 162.72,
+      "text": "Execution"
+    },
+    {
+      "id": 69,
+      "t0": 162.72,
+      "t1": 163.6,
+      "text": "If I can"
+    },
+    {
+      "id": 70,
+      "t0": 163.6,
+      "t1": 166.31,
+      "text": "If I can give them all the execution"
+    },
+    {
+      "id": 71,
+      "t0": 166.31,
+      "t1": 167.24,
+      "text": "Then I can"
+    },
+    {
+      "id": 72,
+      "t0": 167.24,
+      "t1": 169.99,
+      "text": "Then I can be your only execution"
+    },
+    {
+      "id": 73,
+      "t0": 169.99,
+      "t1": 171.95,
+      "text": "If I can have you back"
+    },
+    {
+      "id": 74,
+      "t0": 171.95,
+      "t1": 173.7,
+      "text": "I will run the execution"
+    },
+    {
+      "id": 75,
+      "t0": 173.7,
+      "t1": 175.14,
+      "text": "Though we are trapped"
+    },
+    {
+      "id": 76,
+      "t0": 175.14,
+      "t1": 177.41,
+      "text": "We are trapped, ah"
+    },
+    {
+      "id": 77,
+      "t0": 177.41,
+      "t1": 178.3,
+      "text": "I've studied"
+    },
+    {
+      "id": 78,
+      "t0": 178.3,
+      "t1": 181.16,
+      "text": "I've studied how to properly lo-o-ove",
+      "kw": "LOVE",
+      "kwT": 179.93
+    },
+    {
+      "id": 79,
+      "t0": 181.16,
+      "t1": 182.09,
+      "text": "Question me"
+    },
+    {
+      "id": 80,
+      "t0": 182.09,
+      "t1": 184.83,
+      "text": "Question me, I can answer all lo-o-ove",
+      "kw": "LOVE",
+      "kwT": 183.65
+    },
+    {
+      "id": 81,
+      "t0": 184.83,
+      "t1": 188.48,
+      "text": "I know the algebraic expression of lo-o-ove",
+      "kw": "LOVE",
+      "kwT": 187.67
+    },
+    {
+      "id": 82,
+      "t0": 188.48,
+      "t1": 189.89,
+      "text": "Though you are free"
+    },
+    {
+      "id": 83,
+      "t0": 189.89,
+      "t1": 190.77,
+      "text": "I am trapped"
+    },
+    {
+      "id": 84,
+      "t0": 190.77,
+      "t1": 205.96,
+      "text": "Trapped in lo-o-ove",
+      "kw": "LOVE",
+      "kwT": 191.36
+    },
+    {
+      "id": 85,
+      "t0": 205.96,
+      "t1": 211.96,
+      "text": "Execution",
+      "kw": "EXECUTION",
+      "kwT": 205.73
+    }
+  ]
+}

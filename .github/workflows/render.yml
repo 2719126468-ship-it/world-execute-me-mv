@@ -1,0 +1,69 @@
+name: render
+
+on:
+  workflow_dispatch:
+    inputs:
+      width:
+        description: 'width'
+        default: '1920'
+      height:
+        description: 'height'
+        default: '1080'
+      fps:
+        description: 'fps'
+        default: '30'
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tools/**'
+      - 'export/**'
+      - 'config.json'
+      - '.github/workflows/render.yml'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: system deps
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+
+      - name: fonts (from repo)
+        run: WEM_FONT_REPORT=1 node -e "import('./src/core/fonts.js').then(()=>console.log('fonts loaded'))"
+
+      - name: soundtrack
+        run: node tools/make_audio.mjs
+
+      - name: storyboard
+        run: node tools/storyboard.mjs
+
+      - name: render
+        run: |
+          node export/export.mjs --start -5 --end 212 \
+            --width ${{ github.event.inputs.width || 1920 }} \
+            --height ${{ github.event.inputs.height || 1080 }} \
+            --fps ${{ github.event.inputs.fps || 30 }} \
+            --crf 18 --preset veryfast \
+            --out out/preview_1080p30.mp4
+
+      - name: flash check
+        run: python3 tools/check_flash.py out/preview_1080p30.mp4 --preroll 5 | tail -25
+        continue-on-error: true
+
+      - name: probe
+        run: ffprobe -v error -show_entries stream=codec_type,width,height,r_frame_rate -show_entries format=duration,size -of default=nw=1 out/preview_1080p30.mp4
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wem-mv-1080p-${{ github.run_number }}
+          path: out/preview_1080p30.mp4
+          retention-days: 14
