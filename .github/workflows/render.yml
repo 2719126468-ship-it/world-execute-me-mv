@@ -83,6 +83,7 @@ jobs:
         run: node tools/make_audio.mjs
       - name: concat + audio
         run: |
+          mkdir -p out
           ls -la parts
           for i in 0 1 2 3 4 5 6 7; do echo "file 'part_$i.mp4'"; done > parts/list.txt
           ffmpeg -v error -y -f concat -safe 0 -i parts/list.txt -i audio/track.wav \
