@@ -1,4 +1,7 @@
 [
-  {"id":"01_boot","prompt":"she stands quietly in a dark empty room, a few thin glowing blue lines floating near her, eyes closed, vertical composition"},
-  {"id":"23_final","prompt":"she stands alone in a dark room lit from above by one soft white light, both arms relaxed at her sides, vertical composition"}
+ {"id":"03_geometry","prompt":"she stands in a very dark navy room, three thin glowing blue geometric outlines of a circle and a wave float around her, strictly dark background, no bright floor, vertical composition"},
+ {"id":"06_travel","prompt":"medium shot of her from the waist up in a very dark navy fog, flat dark silhouettes of towers far behind her, she fills the centre of the frame, vertical composition"},
+ {"id":"11_eggplant","prompt":"medium shot of her from the waist up, she holds one small purple eggplant in one hand at her side, the eggplant is much smaller than her torso, dark navy background, vertical composition"},
+ {"id":"12_tomato","prompt":"medium shot of her from the waist up, she holds one small red tomato in one hand at her side, dark navy background, vertical composition"},
+ {"id":"16_gender","prompt":"she stands alone in a very dark navy room facing the camera, one thin vertical strip of pale light far behind her, strictly dark background, no white background, vertical composition"}
 ]
