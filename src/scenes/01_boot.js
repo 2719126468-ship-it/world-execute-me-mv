@@ -1,4 +1,5 @@
 // 01_boot.js — 开机 0–15.11
+import { base } from '../core/photo.js';
 import { C, drawFigure, drawText, mix } from '../core/art.js';
 import { clamp, lerp, ease } from '../core/raster.js';
 import { rays, bloom, flash } from '../core/kit.js';

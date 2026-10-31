@@ -9,6 +9,7 @@ import { glyphMask } from '../core/font.js';
 import { chatFrame, inputBar, sysMsg, cursor, subtitle, layout } from '../core/ui.js';
 import { finalPlate } from './12_outro.js';
 import { cue } from './cues.js';
+import { base, figOrSkip } from '../core/photo.js';
 
 export const id = 'shutdown';
 export const start = 192.34;
@@ -92,7 +93,7 @@ export function draw(ctx, surf, t) {
   // 玻璃后的灰胸像（和开机同一位置）
   const ghostA = clamp((t - 196.04) / 0.6, 0, 1) * (1 - clamp((t - 208.2) / 0.8, 0, 1)) * 0.5;
   if (ghostA > 0) {
-    plateFigure(surf, 'f_bust', {
+    figOrSkip(surf, '01_boot', 'f_bust', {
       x: W * 0.52 - 330 * s, y: H * 0.16, w: 660 * s, alpha: ghostA, glow: 0.15,
       role: {
         black: mix(C('ink'), C('dead'), 0.7), cream: mix(C('ink'), C('off'), 0.5),

@@ -1,4 +1,5 @@
 // 08_chorus2.js — 副歌二 103.73–121.73
+import { base } from '../core/photo.js';
 import { C, mix, plateFigure, drawFigure, drawText, glowDisc } from '../core/art.js';
 import { clamp, lerp, ease } from '../core/raster.js';
 import { bloom, flash, bars, rays } from '../core/kit.js';

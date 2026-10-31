@@ -10,6 +10,7 @@ import { asciiSphere, asciiBurst, asciiScroll } from '../core/ascii.js';
 import { wireSphere, heartCurve, roundRect } from '../core/geom.js';
 import { cue } from './cues.js';
 import { lineAt, wordsWithTimes, text } from './texts.js';
+import { base, figOrSkip } from '../core/photo.js';
 
 export const id = 'chorusx';
 export const start = 162.81;
@@ -46,7 +47,7 @@ function figMask(ctx, name, w, flipX = false) {
 // ---------- 共用层 ----------
 function layers(surf, ctx, t, o = {}) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 6, proof: { sheet: '09/12' } });
+  base(surf, ctx, t, o.photo || '20_disheart', { noise: 6, proof: { sheet: '09/12' }, h: o.ph ?? 0.9, x: o.px ?? 0.66 });
   // 1. 身后的日芒：缓慢旋转，长度随低频呼吸
   const breath = 0.5 + 0.5 * Math.sin(t * 1.1);
   const cx = W * (o.sunX ?? 0.5), cy = H * (o.sunY ?? 0.46);
@@ -112,7 +113,7 @@ function innerScreen(surf, ctx, t, mask, x, y, w, h) {
 // 关键词版画（坏了的那三张）
 function brokenPlate(surf, ctx, t, kind) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 6, proof: { sheet: '09/12' } });
+  base(surf, ctx, t, o.photo || '20_disheart', { noise: 6, proof: { sheet: '09/12' }, h: o.ph ?? 0.9, x: o.px ?? 0.66 });
   const a = t - (kind === 'stim' ? 165.11 : kind === 'satis' ? 168.81 : 172.73);
   const hit = Math.exp(-a * 9);
   const off = lerp(10, 28, clamp(a / 1.2, 0, 1)) * s;
@@ -202,12 +203,12 @@ function brokenPlate(surf, ctx, t, kind) {
 // ---------- 镜头 ----------
 function shotEye(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  const L = layers(surf, ctx, t, { sunX: 0.5, sunY: 0.5, sphereR: 0.16, sphereX: 0.5, sphereY: 0.42 });
+  const L = layers(surf, ctx, t, { photo: '20_disheart', ph: 1.02, px: 0.5, sunX: 0.5, sunY: 0.5 });
   // f_eye 满版（水平镜像）
   const w = W * 1.12;
   const h = w;
   const pick = clamp((t - 162.81) / 0.5, 0, 1);
-  plateFigure(surf, 'f_eye', {
+  figOrSkip(surf, '20_disheart', 'f_eye', {
     x: W / 2 - w / 2, y: H / 2 - h / 2, w, flipX: true, glow: 0.2,
     role: { black: mix(C('ink'), C('meDim'), 0.1), cream: mix(C('you'), C('ash'), 0.42), me: C('me') },
   });
@@ -234,10 +235,10 @@ function shotEye(surf, ctx, t) {
 
 function shotBust(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  const L = layers(surf, ctx, t, { sunX: 0.5, sunY: 0.5, sphereR: 0.22, sphereX: 0.5, sphereY: 0.3 });
+  const L = layers(surf, ctx, t, { photo: '15_exist', ph: 0.94, px: 0.62, sunX: 0.5, sunY: 0.5 });
   const w = H * 0.96 * (1000 / 1400);
   const fy0 = H * 0.02;
-  plateFigure(surf, 'f_bust', { x: W / 2 - w / 2, y: fy0, w, glow: 0.62 });
+  figOrSkip(surf, '15_exist', 'f_bust', { x: W / 2 - w / 2, y: fy0, w, glow: 0.62 });
   // 脸是屏幕（脸洞位置：figure 坐标 500,372 / 1000x1400）
   const mask = figMask(ctx, 'f_bust', w);
   const fx = W / 2 - w * 0.155, fy = fy0 + w * 1.4 * 0.19, fw = w * 0.31, fh = w * 1.4 * 0.27;
@@ -253,10 +254,10 @@ function shotBust(surf, ctx, t) {
 
 function shotHand(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  const L = layers(surf, ctx, t, { sunX: 0.5, sunY: 0.55, sphereR: 0.24, sphereX: 0.42, sphereY: 0.4 });
+  const L = layers(surf, ctx, t, { photo: '22_love', ph: 0.9, px: 0.66, sunX: 0.5, sunY: 0.55 });
   // f_reach 最下面一段（手）：放大并把掌心放到画面中右
   const w = W * 1.9;
-  plateFigure(surf, 'f_reach', { x: -W * 0.28, y: -H * 1.02, w, glow: 0.4 });
+  figOrSkip(surf, '22_love', 'f_reach', { x: -W * 0.28, y: -H * 1.02, w, glow: 0.4 });
   const palmX = W * 0.54, palmY = H * 0.56;
   // 手心的虚线心形：呼吸
   const br = 1 + 0.06 * Math.sin(t * 4.2);
@@ -283,7 +284,7 @@ function shotHand(surf, ctx, t) {
 
 function shotBox(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 5, proof: { sheet: '09/12' } });
+  base(surf, ctx, t, '10_sim', { noise: 5, proof: { sheet: '09/12' } });
   const a = clamp((t - 173.88) / (177.57 - 173.88), 0, 1);
   const speed = 0.5 + 6.5 * Math.pow(a, 2.2);
   const phase = (t - 173.88) * (1 + 7 * a * a);

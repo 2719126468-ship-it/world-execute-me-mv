@@ -72,7 +72,7 @@ export function rays(surf, o) {
       [cx - px * w * 0.3, cy - py * w * 0.3],
     ]);
   }
-  surf.fillPath(polys, color, { alpha, mode: 'over' });
+  surf.fillPath(polys, color, { alpha, mode: 'over', aa: 2 });
   return surf;
 }
 

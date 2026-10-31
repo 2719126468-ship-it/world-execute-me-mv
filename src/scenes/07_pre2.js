@@ -1,5 +1,6 @@
 // 07_pre2.js — 导歌二 88.96–103.73（控件放大到她身上）
 // 踩点：90.80 B(49) F / 91.72 Bt(198) M / 98.19 B(53) S / 99.10 Bt(214) M
+import { base, figOrSkip } from '../core/photo.js';
 import { C, mix, ground, drawFigure, plateFigure, drawText, drawTextHollow, textWidth, bigCursor, glowDisc } from '../core/art.js';
 import { clamp, lerp, ease, circlePoly } from '../core/raster.js';
 import { rays, bloom, B, flash } from '../core/kit.js';
@@ -117,7 +118,7 @@ function uiSettings(ctx, surf, t) {
 // ---------- 2. 性别 ----------
 function plateGender(ctx, surf, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 5, proof: { sheet: '05/12' } });
+  base(surf, ctx, t, '16_gender', { noise: 5, proof: { sheet: '05/12' } });
   const tCut = 90.80;
   const tL1 = cue('pre2.gender.letter1');
   const tD1 = cue('pre2.gender.d1');
@@ -208,7 +209,7 @@ function plateDay(ctx, surf, t) {
   const tD3 = cue('pre2.day.d3');
   const tPM = cue('pre2.day.pm');
   const tD4 = cue('pre2.day.d4');
-  ground(surf, t, { noise: 5, proof: { sheet: '05/12' } });
+  base(surf, ctx, t, '04_current', { noise: 5, proof: { sheet: '05/12' } });
 
   // 弧线：On call 的滑块
   const cx = W * 0.5, cy = H * 1.28;
@@ -243,7 +244,7 @@ function plateDay(ctx, surf, t) {
   const boyW = 420 * s;
   const dusk = clamp((t - tD3) / (tD4 - tD3 + 0.2), 0, 1);
   const bodyA = 1 - dusk * 0.55;
-  plateFigure(surf, 'boy_bust', {
+  figOrSkip(surf, '16_gender', 'boy_bust', {
     x: W / 2 - boyW / 2, y: 560 * s, w: boyW, alpha: bodyA, glow: 0.3 * (1 - dusk * 0.6), inkLift: 0.32,
     role: {
       black: mix(mix(C('ink'), C('meDim'), 0.3), C('dead'), dusk * 0.45),
@@ -295,7 +296,7 @@ function plateRole(ctx, surf, t) {
   const tRel = cue('pre2.role.release');
   const tL2 = cue('pre2.role.letter2');
   const tD8 = cue('pre2.role.d8');
-  ground(surf, t, { noise: 5, proof: { sheet: '05/12' } });
+  base(surf, ctx, t, '17_role', { noise: 5, proof: { sheet: '05/12' } });
 
   const groundY = H * 0.74;
   // 台子

@@ -8,6 +8,7 @@ import { heartCurve, roundRect } from '../core/geom.js';
 import { glyphMask, textMask } from '../core/font.js';
 import { cue } from './cues.js';
 import { lineAt } from './texts.js';
+import { base, figOrSkip } from '../core/photo.js';
 
 export const id = 'outroH';
 export const start = 177.57;
@@ -74,7 +75,7 @@ function stutterWord(surf, ctx, t, o) {
 // ---------- 课 ----------
 function lesson(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 6, proof: { sheet: '10/12' } });
+  base(surf, ctx, t, '22_love', { noise: 6, proof: { sheet: '10/12' } });
   // 从白场沉下来（两拍内只降不升）
   const sink = clamp((t - 177.57) / 0.92, 0, 1);
   const dim = (1 - sink) * 0.98;
@@ -82,7 +83,7 @@ function lesson(surf, ctx, t) {
   rays(surf, { cx: W * 0.72, cy: H * 0.42, n: 20, r0: 60 * s, r1: W * 0.5, rot: t * 0.04, width: 3 * s, color: C('meDim'), alpha: 0.18 });
 
   const w = H * 0.86 * (1000 / 1400);
-  plateFigure(surf, 'f_profile', {
+  figOrSkip(surf, '22_love', 'f_profile', {
     x: W * 0.62 - w / 2, y: H * 0.1, w, glow: 0.5,
     role: { black: mix(C('ink'), C('meDim'), 0.16), cream: mix(C('you'), C('ash'), 0.3), me: C('me') },
   });
@@ -113,7 +114,7 @@ function lesson(surf, ctx, t) {
 // ---------- 测验 ----------
 function quiz(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 5, proof: { sheet: '10/12' } });
+  base(surf, ctx, t, '03_geometry', { noise: 5, proof: { sheet: '10/12' } });
   grid(surf, 60 * s, C('meDim'), 0.06);
   const qs = ['what is love', 'how do i get it', 'why does it hurt', 'when will you answer', 'who are you', 'where do you go'];
   const n = qs.length;
@@ -153,7 +154,7 @@ function quiz(surf, ctx, t) {
 // ---------- 公式 ----------
 function formula(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 5, proof: { sheet: '10/12' } });
+  base(surf, ctx, t, '22_love', { noise: 5, proof: { sheet: '10/12' } });
   const cx = W * 0.58, cy = H * 0.48, R = H * 0.4;
   const heart = heartCurve(cx, cy, R, 160);
   // 光点逐点描出（连续滑动，不是 12 步）
@@ -204,7 +205,7 @@ function proof(surf, ctx, t) {
     return;
   }
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 5, proof: { sheet: '10/12' } });
+  base(surf, ctx, t, '23_final', { noise: 5, proof: { sheet: '10/12' } });
   const cx = W * 0.5, cy = H * 0.46, R = H * 0.42;
   const heart = heartCurve(cx, cy, R, 200);
 
@@ -217,7 +218,7 @@ function proof(surf, ctx, t) {
   const clean = clamp((t - 191.7) / 0.1, 0, 1);
   const w = H * 0.78 * (1000 / 1400);
   const figA = 0.45 + 0.55 * clamp((t - 188.9) / 1.6, 0, 1);
-  plateFigure(surf, 'f_reach', {
+  figOrSkip(surf, '23_final', 'f_reach', {
     x: cx - w / 2, y: cy - w * 1.4 * 0.42, w,
     glow: 0.35 + 0.4 * align,
     role: {

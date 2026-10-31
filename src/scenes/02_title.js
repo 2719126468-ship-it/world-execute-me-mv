@@ -1,4 +1,5 @@
 // 02_title.js — 标题与人设 15.11–30.0
+import { base } from '../core/photo.js';
 import { C, mix, drawFigure, plateFigure, drawText, textWidth, glowDisc } from '../core/art.js';
 import { clamp, lerp, ease } from '../core/raster.js';
 import { rays, bloom, flash } from '../core/kit.js';

@@ -9,6 +9,7 @@ import { ellipse, smoothClosed, roundRect } from '../core/geom.js';
 import { chatFrame, inputBar, userMsg, herMsg, subtitle } from '../core/ui.js';
 import { cue } from './cues.js';
 import { lineAt } from './texts.js';
+import { base, figOrSkip } from '../core/photo.js';
 
 export const id = 'verse2';
 export const start = 74.19;
@@ -87,7 +88,7 @@ function tomatoPolys(cx, cy, w, h, cut) {
 // ---------- 相机：名词版画 ----------
 function objectPlate(surf, ctx, t, kind) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 5, proof: { sheet: '04/12' } });
+  base(surf, ctx, t, kind === 'eggplant' ? '11_eggplant' : '12_tomato', { noise: 5, proof: { sheet: '04/12' } });
   const spotc = spotOf(kind === 'eggplant' ? 'eggplant' : 'tomato');
   const t0 = kind === 'eggplant' ? 75.10 : 78.80;
   const openAt = kind === 'eggplant' ? 76.46 : 80.15;
@@ -140,7 +141,7 @@ function objectPlate(surf, ctx, t, kind) {
 // ---------- 猫 ----------
 function catPlate(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 5, proof: { sheet: '04/12' } });
+  base(surf, ctx, t, '13_cat', { noise: 5, proof: { sheet: '04/12' } });
   const earsAt = cue('verse2.cat');
   const pawsAt = 83.42;
   const giveAt = cue('verse2.enjoyment');
@@ -160,7 +161,7 @@ function catPlate(surf, ctx, t) {
   } else {
     // 实心三墨 cat_paws + 呼噜声波形画的虎斑条纹
     const w = H * 0.9 * (1000 / 1400);
-    plateFigure(surf, 'cat_paws', { x: W / 2 - w / 2, y: H * 0.05, w, glow: 0.5 });
+    figOrSkip(surf, '13_cat', 'cat_paws', { x: W / 2 - w / 2, y: H * 0.05, w, glow: 0.5 });
     const stripes = [];
     for (let i = 0; i < 14; i++) {
       const y = H * 0.36 + i * 22 * s;
@@ -192,13 +193,13 @@ function catPlate(surf, ctx, t) {
 function godPlate(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
   // 灯暗下来
-  ground(surf, t, { noise: 4, proof: { sheet: '04/12' }, blobs: [] });
+  base(surf, ctx, t, '14_god', { noise: 4, proof: { sheet: '04/12' }, blobs: [] });
   const w = H * 0.92 * (1000 / 1400);
   const fx = W / 2 - w / 2, fy = H * 0.06;
   const godAt = cue('verse2.god');
   const existAt = cue('verse2.existence');
   // 只印橙和黑两个版：米白缺失
-  plateFigure(surf, 'f_bust', {
+  figOrSkip(surf, '14_god', 'f_bust', {
     x: fx, y: fy, w, glow: 0.25,
     role: { black: mix(C('ink'), C('meDim'), 0.18), cream: C('ink'), me: C('me'), paper: mix(C('ink'), C('paper'), 0.35) },
   });

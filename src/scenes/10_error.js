@@ -1,4 +1,5 @@
 // 10_error.js — 报错段 125.65–148.04
+import { base } from '../core/photo.js';
 import { C, mix, plateFigure, drawText, drawTextHollow, textWidth, glowDisc, ground } from '../core/art.js';
 import { clamp, lerp, ease } from '../core/raster.js';
 import { bloom, flash, glitch, scanlines } from '../core/kit.js';

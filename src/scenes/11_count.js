@@ -1,4 +1,5 @@
 // 11_count.js — 数数 159.11–161.88（六张卡片，整拍）
+import { base } from '../core/photo.js';
 import { C, mix, drawText, textWidth, ground, glowDisc } from '../core/art.js';
 import { clamp, ease } from '../core/raster.js';
 import { bloom, scanlines } from '../core/kit.js';
@@ -88,7 +89,8 @@ export function draw(ctx, surf, t) {
   const idx = clamp(Math.floor((t - T0) / BEAT + 1e-6), 0, 5);
   const local = clamp((t - (T0 + idx * BEAT)) / 0.12, 0, 1);
   const cur = LANGS[idx];
-  ground(surf, t, { noise: 4, proof: { sheet: '08/12' }, blobs: [] });
+  const COUNT_PHOTOS = ['03_geometry', '05_dizzy', '06_travel', '10_sim', '13_cat', '22_love'];
+  base(surf, ctx, t, COUNT_PHOTOS[idx], { noise: 4, proof: { sheet: '08/12' }, h: 0.86, x: 0.72 });
   scanlines(surf, 0.05, 3);
 
   // 左上：^C + 调用行

@@ -1,4 +1,5 @@
 // 04_pre1.js — 30.0–59.42（对话、dizzy 开关、A.D→B.C 时间旅行）
+import { base } from '../core/photo.js';
 import { C, mix, drawText, drawTextHollow, textWidth, glowDisc } from '../core/art.js';
 import { clamp, lerp, ease } from '../core/raster.js';
 import { rays, bloom, flash, grid } from '../core/kit.js';

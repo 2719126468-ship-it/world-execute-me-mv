@@ -125,7 +125,7 @@ export class Surface {
     const alpha = opt.alpha ?? 1;
     const mode = opt.mode ?? 'over';
     const evenOdd = !!opt.evenOdd;
-    const aa = opt.aa ?? 3;
+    const aa = opt.aa ?? 2;
     const clip = opt.clip ?? null;
     const W = this.w, H = this.h;
     const [cr, cg, cb] = rgb;

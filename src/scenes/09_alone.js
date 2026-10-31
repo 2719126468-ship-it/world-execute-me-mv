@@ -1,4 +1,5 @@
 // 09_alone.js — 空线程 121.73–125.65（FRAGMENTS / DISHEARTENED）
+import { base, figOrSkip } from '../core/photo.js';
 import { C, mix, plateFigure, drawText, drawTextHollow, textWidth, glowDisc, figureMask } from '../core/art.js';
 import { clamp, lerp, ease } from '../core/raster.js';
 import { bloom, flash, glitch } from '../core/kit.js';
@@ -33,7 +34,7 @@ export function draw(ctx, surf, t) {
     const hit = Math.exp(-(t - hitAt) * 6);
     // f_eye 满版，平涂的灰色三墨
     const w = W * 1.16;
-    plateFigure(surf, 'f_eye', {
+    figOrSkip(surf, '20_disheart', 'f_eye', {
       x: W / 2 - w / 2, y: H / 2 - w / 2, w, flipX: true, glow: 0.25,
       role: { black: mix(C('ink'), C('ash'), 0.25), cream: mix(C('ash'), C('you'), 0.25), me: C('ash') },
     });
@@ -95,7 +96,7 @@ export function draw(ctx, surf, t) {
   sysMsg(surf, ctx, '> message deleted', { x: area.x, y: area.y + 20 * s, alpha: 0.5 });
   // 背景：平涂底版 + 半调网点 + 压暗（来源 f_profile）
   const w = H * 0.8 * (1000 / 1400);
-  plateFigure(surf, 'f_profile', {
+  figOrSkip(surf, '19_frag', 'f_profile', {
     x: W * 0.68, y: H * 0.1, w, glow: 0.1, alpha: 0.55,
     role: { black: mix(C('paper'), C('ash'), 0.35), cream: mix(C('paper'), C('you'), 0.18), me: mix(C('paper'), C('meDim'), 0.4), paper: C('paper') },
   });

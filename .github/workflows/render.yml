@@ -3,15 +3,10 @@ name: render
 on:
   workflow_dispatch:
     inputs:
-      width:
-        description: 'width'
-        default: '1920'
-      height:
-        description: 'height'
-        default: '1080'
-      fps:
-        description: 'fps'
-        default: '30'
+      width: { description: 'width', default: '1920' }
+      height: { description: 'height', default: '1080' }
+      fps: { description: 'fps', default: '30' }
+      shards: { description: 'shard count', default: '8' }
   push:
     branches: [main]
     paths:
@@ -19,51 +14,86 @@ on:
       - 'tools/**'
       - 'export/**'
       - 'config.json'
+      - 'art/hero/**'
       - '.github/workflows/render.yml'
 
+env:
+  TOTAL_START: '-5'
+  TOTAL_END: '212'
+
 jobs:
-  render:
+  shard:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
+        with: { node-version: '22' }
       - name: system deps
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: prepare art cache
+        run: node tools/prep_art.mjs
+      - name: shard window
+        id: win
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg
-
-      - name: fonts (from repo)
-        run: WEM_FONT_REPORT=1 node -e "import('./src/core/fonts.js').then(()=>console.log('fonts loaded'))"
-
-      - name: soundtrack
-        run: node tools/make_audio.mjs
-
-      - name: storyboard
-        run: node tools/storyboard.mjs
-
-      - name: render
+          node -e '
+            const s=Number(process.env.TOTAL_START), e=Number(process.env.TOTAL_END);
+            const N=Number(process.env.SHARDS||8), n=Number(process.env.SHARD_ID||0);
+            const span=(e-s)/N;
+            const a=s+n*span, b=(n===N-1)?e:s+(n+1)*span;
+            console.log(`start=${a.toFixed(4)}`);
+            console.log(`end=${b.toFixed(4)}`);
+          ' >> "$GITHUB_OUTPUT"
+        env:
+          SHARDS: ${{ github.event.inputs.shards || '8' }}
+          SHARD_ID: ${{ matrix.shard }}
+      - name: render shard
         run: |
-          node export/export.mjs --start -5 --end 212 \
-            --width ${{ github.event.inputs.width || 1920 }} \
-            --height ${{ github.event.inputs.height || 1080 }} \
-            --fps ${{ github.event.inputs.fps || 30 }} \
-            --crf 18 --preset veryfast \
-            --out out/preview_1080p30.mp4
-
-      - name: flash check
-        run: python3 tools/check_flash.py out/preview_1080p30.mp4 --preroll 5 | tail -25
-        continue-on-error: true
-
-      - name: probe
-        run: ffprobe -v error -show_entries stream=codec_type,width,height,r_frame_rate -show_entries format=duration,size -of default=nw=1 out/preview_1080p30.mp4
-
+          node export/export.mjs --start ${{ steps.win.outputs.start }} --end ${{ steps.win.outputs.end }} \
+            --width ${{ github.event.inputs.width || '1920' }} \
+            --height ${{ github.event.inputs.height || '1080' }} \
+            --fps ${{ github.event.inputs.fps || '30' }} \
+            --noaudio --crf 18 --preset veryfast --out out/part_${{ matrix.shard }}.mp4
       - uses: actions/upload-artifact@v4
         with:
-          name: wem-mv-1080p-${{ github.run_number }}
-          path: out/preview_1080p30.mp4
+          name: part-${{ matrix.shard }}
+          path: out/part_${{ matrix.shard }}.mp4
+          retention-days: 7
+
+  merge:
+    needs: shard
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: system deps
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: part-*
+          merge-multiple: true
+          path: parts
+      - name: soundtrack
+        run: node tools/make_audio.mjs
+      - name: concat + audio
+        run: |
+          ls -la parts
+          for i in 0 1 2 3 4 5 6 7; do echo "file 'parts/part_$i.mp4'"; done > parts/list.txt
+          ffmpeg -v error -y -f concat -safe 0 -i parts/list.txt -i audio/track.wav \
+            -af "adelay=5000|5000" -c:v copy -c:a aac -b:a 192k -shortest \
+            -movflags +faststart out/world_execute_me_v4_1080p30.mp4
+          ffprobe -v error -show_entries stream=codec_type,width,height,r_frame_rate -show_entries format=duration,size -of default=nw=1 out/world_execute_me_v4_1080p30.mp4
+      - name: flash check
+        run: python3 tools/check_flash.py out/world_execute_me_v4_1080p30.mp4 --preroll 5 | tail -25
+        continue-on-error: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: world-execute-me-v4-1080p30
+          path: out/world_execute_me_v4_1080p30.mp4
           retention-days: 14

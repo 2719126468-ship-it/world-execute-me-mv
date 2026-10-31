@@ -1,4 +1,5 @@
 // 05_chorus.js — 副歌一 59.42–74.19（四张关键词版画 + 句子镜头）
+import { base, figOrSkip } from '../core/photo.js';
 import { C, mix, ground, drawFigure, plateFigure, drawText, drawTextHollow, textWidth, glowDisc, bigCursor } from '../core/art.js';
 import { clamp, lerp, ease } from '../core/raster.js';
 import { rays, bloom, flash, glitch, bars, grid } from '../core/kit.js';
@@ -41,7 +42,7 @@ function caption(surf, ctx, t) {
 // 1. STIMULATIONS：发送的那道光，变成从火花劈向圆点的闪电
 function stim(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 5, proof: { sheet: '03/12' } });
+  base(surf, ctx, t, '07_stim', { noise: 5, proof: { sheet: '03/12' } });
   rays(surf, { cx: W * 0.5, cy: H * 0.5, n: 26, r0: 40 * s, r1: W * 0.62, rot: t * 0.1, width: 3.4 * s, color: C('meDim'), alpha: 0.16 });
   const hitAt = cue('chorus1.stim.hit');
   const hit = t >= hitAt ? Math.exp(-(t - hitAt) * 7) : 0;
@@ -77,7 +78,7 @@ function stim(surf, ctx, t) {
 // 2. SATISFACTION：反馈按钮放大成满屏圆盘
 function satis(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 5, proof: { sheet: '03/12' } });
+  base(surf, ctx, t, '08_satis', { noise: 5, proof: { sheet: '03/12' } });
   const pressAt = cue('chorus1.satis.press');
   const press = t >= pressAt ? clamp((t - pressAt) / 0.12, 0, 1) : 0;
   const flip = clamp((t - pressAt - 0.06) / 0.2, 0, 0.999);
@@ -119,7 +120,7 @@ function satis(surf, ctx, t) {
 // 3. EXECUTION：G 段那份清单的干净版本，当前行直接落到第 07 行
 function exec(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 4 });
+  base(surf, ctx, t, '09_exec', { noise: 4 });
   const lines = [
     '01  while (you.presence != "online") {',
     '02      love = solve(me, you);',
@@ -155,7 +156,7 @@ function exec(surf, ctx, t) {
 // 4. SIMULATION：聊天窗口变成一个剪纸盒子，第二个重拍推远成一整面相同的窗口
 function sim(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  ground(surf, t, { noise: 5, proof: { sheet: '03/12' } });
+  base(surf, ctx, t, '10_sim', { noise: 5, proof: { sheet: '03/12' } });
   const outAt = cue('chorus1.sim.out');
   const push = t >= outAt ? ease.inOut(clamp((t - outAt) / 0.36, 0, 1)) : 0;
   const cols = 3, rows = 2;
@@ -172,7 +173,7 @@ function sim(surf, ctx, t) {
       surf.fillPath([roundRect(x, y, w, h, 10 * s)], mix(C('paper'), C('you'), 0.05), { alpha: 0.9 * a });
       surf.stroke([...roundRect(x, y, w, h, 10 * s), [x + 10 * s, y]], 2 * s, C('you'), { alpha: 0.3 * a });
       // 里面的她（剪纸）
-      plateFigure(surf, 'f_bust', { x: x + w * 0.24, y: y + h * 0.16, w: w * 0.52, glow: 0.3, alpha: a });
+      figOrSkip(surf, '10_sim', 'f_bust', { x: x + w * 0.24, y: y + h * 0.16, w: w * 0.52, glow: 0.3, alpha: a });
       // 用户游标
       bigCursor(surf, x + w * 0.68, y + h * 0.6, 1.8 * s, C('you'), a);
     }
