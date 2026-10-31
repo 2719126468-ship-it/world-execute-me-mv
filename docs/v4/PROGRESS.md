@@ -66,3 +66,12 @@
 - `art.js` 新增 `proofMarks()`，`ground()` 接受 `proof:{sheet}`；副歌一、主歌二、導歌二、最後副歌、LOVE 前三鏡啟用，最後一幀不啟用。
 - 數數段六張卡改成六種印刷缺陷（套印偏移、飛墨、網點過重、背面透印、撕邊、墨流）。
 - 已重導 `fix_pre2` 與 `fix_climax`（含校樣標記）。
+
+
+## 7. 第三輪：AI 插畫層與 CI 渲染
+
+- 生圖：23 張歌詞插畫，Nano Banana（webbanana 反代）+ 你的角色原圖為參考；`tools/banana_batch2.py` 會在每次生成前確認代理出口是美國（Gemini 對非支援地區直接 LOCATION_REJECTED）。
+- 接入：`src/core/photo.js`（raw 直讀、底版/印張/LUT 快取）＋ `tools/prep_art.mjs`（ffmpeg 預處理）；每個版畫場景改用 `base(surf, ctx, t, '<plate>', ...)`，有插畫就用插畫、沒有就回退紙底，CI 與本地同一套行為。人物剪影在有插畫時自動跳過（`figOrSkip`）。
+- 性能：LUT 調色、像素直寫網點、1/4 尺寸模糊、`fillPath` 預設 2 子採樣；1080p 每幀從 7s 降到 1.3–2.5s（手機）。
+- CI：`.github/workflows/render.yml` 改成 8 片矩陣（每片約 814 幀），單片在 runner 上 106–180ms/幀，全片約 5 分鐘（手機要 4 小時以上）；merge job 合併、加音軌、跑閃光檢查、上傳 artifact。倉庫：https://github.com/2719126468-ship-it/world-execute-me-mv
+- 交付：`wem_v5_illustrated_1080p30.mp4`（插畫版全片）與 `wem_v4_ci_1080p30.mp4`（純代碼版全片）已複製到 `/sdcard/DCIM/Camera/`，23 張插畫原圖在 `/sdcard/DCIM/Camera/wem_art/`。
