@@ -84,7 +84,7 @@ jobs:
       - name: concat + audio
         run: |
           ls -la parts
-          for i in 0 1 2 3 4 5 6 7; do echo "file 'parts/part_$i.mp4'"; done > parts/list.txt
+          for i in 0 1 2 3 4 5 6 7; do echo "file 'part_$i.mp4'"; done > parts/list.txt
           ffmpeg -v error -y -f concat -safe 0 -i parts/list.txt -i audio/track.wav \
             -af "adelay=5000|5000" -c:v copy -c:a aac -b:a 192k -shortest \
             -movflags +faststart out/world_execute_me_v4_1080p30.mp4
