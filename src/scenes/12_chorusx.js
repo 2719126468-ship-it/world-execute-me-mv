@@ -10,7 +10,7 @@ import { asciiSphere, asciiBurst, asciiScroll } from '../core/ascii.js';
 import { wireSphere, heartCurve, roundRect } from '../core/geom.js';
 import { cue } from './cues.js';
 import { lineAt, wordsWithTimes, text } from './texts.js';
-import { base, figOrSkip } from '../core/photo.js';
+import { base, figOrSkip, hasPhoto } from '../core/photo.js';
 
 export const id = 'chorusx';
 export const start = 162.81;
@@ -48,14 +48,14 @@ function figMask(ctx, name, w, flipX = false) {
 function layers(surf, ctx, t, o = {}) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
   base(surf, ctx, t, o.photo || '20_disheart', { noise: 6, proof: { sheet: '09/12' }, h: o.ph ?? 0.9, x: o.px ?? 0.66 });
-  // 1. 身后的日芒：缓慢旋转，长度随低频呼吸
+  // 1. 身后的日芒：缓慢旋转，长度随低频呼吸（有插画时不画，免得和插画打架）
   const breath = 0.5 + 0.5 * Math.sin(t * 1.1);
   const cx = W * (o.sunX ?? 0.5), cy = H * (o.sunY ?? 0.46);
-  rays(surf, {
+  if (!hasPhoto(o.photo)) rays(surf, {
     cx, cy, n: 30, r0: W * 0.04, r1: W * (0.52 + 0.06 * breath),
     rot: t * 0.055, width: (4 + 3 * breath) * s, color: C('meDim'), alpha: 0.24,
   });
-  rays(surf, {
+  if (!hasPhoto(o.photo)) rays(surf, {
     cx, cy, n: 16, r0: W * 0.1, r1: W * (0.34 + 0.05 * breath),
     rot: -t * 0.04, width: (8 + 4 * breath) * s, color: C('me'), alpha: 0.15,
   });
@@ -63,11 +63,11 @@ function layers(surf, ctx, t, o = {}) {
   // 2. 远景：字符球 + 线框（暗一级的蓝）
   const r = W * (o.sphereR ?? 0.19);
   const sphX = W * (o.sphereX ?? 0.5), sphY = H * (o.sphereY ?? 0.42);
-  asciiSphere(surf, {
+  if (!hasPhoto(o.photo)) asciiSphere(surf, {
     cx: sphX, cy: sphY, r, rot: t * 0.5, tilt: 0.32, n: 170,
     font: ctx.fonts.mono, size: 13 * s, color: mix(C('meDim'), C('me'), 0.35), alpha: 0.5, seed: 11,
   });
-  const lines = wireSphere(sphX, sphY, r * 1.06, t * 0.22, 0.32, 8, 5);
+  const lines = hasPhoto(o.photo) ? [] : wireSphere(sphX, sphY, r * 1.06, t * 0.22, 0.32, 8, 5);
   const wirePolys = [];
   for (const ln of lines) {
     for (let i = 0; i + 1 < ln.length; i++) {
@@ -244,7 +244,7 @@ function shotBust(surf, ctx, t) {
   const fx = W / 2 - w * 0.155, fy = fy0 + w * 1.4 * 0.19, fw = w * 0.31, fh = w * 1.4 * 0.27;
   innerScreen(surf, ctx, t, mask, fx, fy, fw, fh);
   // 头后的球与线框：像一圈光环
-  asciiSphere(surf, {
+  if (!hasPhoto('15_exist')) asciiSphere(surf, {
     cx: W / 2, cy: H * 0.22, r: W * 0.17, rot: t * 0.6, tilt: 0.3, n: 150,
     font: ctx.fonts.mono, size: 13 * s, color: C('me'), alpha: 0.55, seed: 5,
   });
@@ -274,7 +274,7 @@ function shotHand(surf, ctx, t) {
   });
   // 身后的球开始散开
   const spread = clamp((t - 170.19) / 2.2, 0, 1);
-  asciiSphere(surf, {
+  if (!hasPhoto('22_love')) asciiSphere(surf, {
     cx: W * 0.38, cy: H * 0.36, r: W * (0.2 + 0.1 * spread), rot: t * 0.7, tilt: 0.3,
     n: 190, font: ctx.fonts.mono, size: 13 * s, color: C('me'), alpha: 0.5 * (1 - spread * 0.5), seed: 9,
   });

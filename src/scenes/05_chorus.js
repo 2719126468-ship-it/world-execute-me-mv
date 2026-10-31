@@ -1,5 +1,5 @@
 // 05_chorus.js — 副歌一 59.42–74.19（四张关键词版画 + 句子镜头）
-import { base, figOrSkip } from '../core/photo.js';
+import { base, figOrSkip, hasPhoto } from '../core/photo.js';
 import { C, mix, ground, drawFigure, plateFigure, drawText, drawTextHollow, textWidth, glowDisc, bigCursor } from '../core/art.js';
 import { clamp, lerp, ease } from '../core/raster.js';
 import { rays, bloom, flash, glitch, bars, grid } from '../core/kit.js';
@@ -43,7 +43,7 @@ function caption(surf, ctx, t) {
 function stim(surf, ctx, t) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
   base(surf, ctx, t, '07_stim', { noise: 5, proof: { sheet: '03/12' } });
-  rays(surf, { cx: W * 0.5, cy: H * 0.5, n: 26, r0: 40 * s, r1: W * 0.62, rot: t * 0.1, width: 3.4 * s, color: C('meDim'), alpha: 0.16 });
+  if (!hasPhoto('07_stim')) rays(surf, { cx: W * 0.5, cy: H * 0.5, n: 26, r0: 40 * s, r1: W * 0.62, rot: t * 0.1, width: 3.4 * s, color: C('meDim'), alpha: 0.16 });
   const hitAt = cue('chorus1.stim.hit');
   const hit = t >= hitAt ? Math.exp(-(t - hitAt) * 7) : 0;
   const appear = clamp((t - hitAt) / 0.12, 0, 1);

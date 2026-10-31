@@ -45,14 +45,14 @@ export function photoStageSurface(w, h, name, o = {}) {
     const q = 4;
     const sw = Math.max(4, Math.round(bw / q)), sh = Math.max(4, Math.round(bh / q));
     const small = img.scaled(sw, sh);
-    small.blur(Math.max(2, Math.round(Math.min(w, h) * 0.035 / q)));
+    small.blur(Math.max(3, Math.round(Math.min(w, h) * 0.075 / q)));
     bg = small.scaled(bw, bh);
   } else {
     bg = img.scaled(bw, bh);
   }
   const full = new Surface(w, h);
   full.composite(bg, Math.round((w - bw) / 2), Math.round((h - bh) / 2), 1, 'over');
-  full.rect(0, 0, w, h, C('paper'), o.dim ?? 0.55);
+  full.rect(0, 0, w, h, C('paper'), o.dim ?? 0.72);
   if (stageCache.size > 8) stageCache.clear();
   stageCache.set(key, full);
   return full;
@@ -86,12 +86,19 @@ export function photoPlate(surf, name, o = {}) {
   const img = photoSurface(name);
   if (!img) return false;
   const W = surf.w, H = surf.h;
-  const h = (o.h ?? 0.88) * H;
+  const h = (o.h ?? 0.98) * H;
   const w = h * img.w / img.h;
   const x = Math.round((o.x ?? 0.5) * W - w / 2);
   const y = Math.round((o.y ?? 0.5) * H - h / 2);
+  // 左右暗场：让竖构图读起来像电影画幅里的主体，而不是贴上去的小图
+  const side = Math.max(40, Math.round((W - w) / 2));
+  for (let i = 0; i < side; i += 2) {
+    const a = 0.5 * (1 - i / side) ** 0.7;
+    surf.rect(x - i, 0, 2, H, C('paper'), { alpha: a });
+    surf.rect(x + w + i, 0, 2, H, C('paper'), { alpha: a });
+  }
   // 投影
-  surf.rect(x + 10, y + 12, w, h, [0, 0, 0], { alpha: 0.45 });
+  surf.rect(x + 8, y + 10, w, h, [0, 0, 0], { alpha: 0.35 });
   const pk = `${name}|${Math.round(w)}x${Math.round(h)}`;
   let s = plateCache.get(pk);
   if (!s) {
@@ -100,14 +107,12 @@ export function photoPlate(surf, name, o = {}) {
     plateCache.set(pk, s);
   }
   surf.composite(s, x, y, 1, 'over');
-  // 边框（印刷品的白边）
-  surf.stroke([[x, y], [x + w, y], [x + w, y + h], [x, y + h], [x, y]], Math.max(1, Math.round(H / 720)), C('you'), { alpha: 0.5 });
   if (o.registration !== false) {
     // 裁切标记
     const u = Math.max(1, Math.round(H / 1080));
     for (const [cx, cy, sx, sy] of [[x, y, 1, 1], [x + w, y, -1, 1], [x, y + h, 1, -1], [x + w, y + h, -1, -1]]) {
-      surf.rect(cx, cy, sx * 26 * u, 2 * u, C('you'), { alpha: 0.55 });
-      surf.rect(cx, cy, 2 * u, sy * 26 * u, C('you'), { alpha: 0.55 });
+      surf.rect(cx, cy, sx * 20 * u, 1.6 * u, C('you'), { alpha: 0.32 });
+      surf.rect(cx, cy, 1.6 * u, sy * 20 * u, C('you'), { alpha: 0.32 });
     }
   }
   return true;
@@ -169,12 +174,12 @@ export function halftoneDots(surf, alpha = 0.13, step = null) {
 export function plateBase(surf, ctx, t, name, o = {}) {
   if (!name || !hasPhoto(name)) return false;
   const W = surf.w, H = surf.h;
-  photoStage(surf, name, { dim: o.stageDim ?? 0.78, blur: o.blur !== false });
-  tintPhoto(surf, { dim: o.stageDim2 ?? 0.5, cool: o.cool ?? 0.42, contrast: o.contrast ?? 1.0 });
+  photoStage(surf, name, { dim: o.stageDim ?? 0.84, blur: o.blur !== false });
+  tintPhoto(surf, { dim: o.stageDim2 ?? 0.34, cool: o.cool ?? 0.4, contrast: o.contrast ?? 0.96 });
   // 印刷肌理：网点（整片写入，避免逐点走 fillPath）
-  halftoneDots(surf, o.dotAlpha ?? 0.13);
+  halftoneDots(surf, o.dotAlpha ?? 0.055);
   if (o.plate !== false) {
-    photoPlate(surf, name, { h: o.h ?? 0.9, x: o.x ?? 0.68, y: o.y ?? 0.5, registration: o.registration !== false });
+    photoPlate(surf, name, { h: o.h ?? 0.98, x: o.x ?? 0.5, y: o.y ?? 0.5, registration: o.registration === true });
   }
   if (o.proof) proofMarks(surf, o.proof);
   return true;

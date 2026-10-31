@@ -1,6 +1,6 @@
 // 07_pre2.js — 导歌二 88.96–103.73（控件放大到她身上）
 // 踩点：90.80 B(49) F / 91.72 Bt(198) M / 98.19 B(53) S / 99.10 Bt(214) M
-import { base, figOrSkip } from '../core/photo.js';
+import { base, figOrSkip, hasPhoto } from '../core/photo.js';
 import { C, mix, ground, drawFigure, plateFigure, drawText, drawTextHollow, textWidth, bigCursor, glowDisc } from '../core/art.js';
 import { clamp, lerp, ease, circlePoly } from '../core/raster.js';
 import { rays, bloom, B, flash } from '../core/kit.js';
@@ -126,8 +126,8 @@ function plateGender(ctx, surf, t) {
   const tD2 = cue('pre2.gender.d2');
   const boy = t >= tL2;
 
-  // 背后的日芒
-  sunburstPlate(surf, ctx, W * 0.5, H * 0.52, W * 0.62, t * 0.05, 1);
+  // 背后的日芒（有插画时不画）
+  if (!hasPhoto('16_gender')) sunburstPlate(surf, ctx, W * 0.5, H * 0.52, W * 0.62, t * 0.05, 1);
 
   // 人物：f_bust -> boy_bust（匹配剪辑，同构图）
   const figW = 740 * s;
