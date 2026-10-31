@@ -113,7 +113,7 @@ function innerScreen(surf, ctx, t, mask, x, y, w, h) {
 // 关键词版画（坏了的那三张）
 function brokenPlate(surf, ctx, t, kind) {
   const s = ctx.s, W = ctx.w, H = ctx.h;
-  base(surf, ctx, t, o.photo || '20_disheart', { noise: 6, proof: { sheet: '09/12' }, h: o.ph ?? 0.9, x: o.px ?? 0.66 });
+  base(surf, ctx, t, kind === 'stim' ? '07_stim' : kind === 'satis' ? '08_satis' : '09_exec', { noise: 6, proof: { sheet: '09/12' } });
   const a = t - (kind === 'stim' ? 165.11 : kind === 'satis' ? 168.81 : 172.73);
   const hit = Math.exp(-a * 9);
   const off = lerp(10, 28, clamp(a / 1.2, 0, 1)) * s;
